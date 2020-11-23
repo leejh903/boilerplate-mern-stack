@@ -47,11 +47,13 @@ function MovieDetail(props) {
 
             {/*Header */}
 
+            { Movie &&
             <MainImage
                 image={`${IMAGE_BASE_URL}w1280${Movie.backdrop_path}`}
                 title={Movie.original_title}
                 text={Movie.overview}
             />
+            }
 
             {/*Body */}
             <div style={{width: '85%', margin: '1rem auto'}}>
