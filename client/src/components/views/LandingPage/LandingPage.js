@@ -16,12 +16,14 @@ function LandingPage() {
 
     }, []);
 
-    const fetchMovies = (endpoint) => {
+    const fetchMovies = (endpoint, fromLoadMoreItem) => {
         fetch(endpoint)
             .then(response => response.json())
             .then(response => {
                 setMovies([...Movies, ...response.results]);
-                setMainMovieImage(response.results[0]) //TODO: MainImage 를 처음에 것을 계속 유지하려면?
+                if(!fromLoadMoreItem) {
+                    setMainMovieImage(response.results[0])
+                }
                 setCurrentPage(response.page)
             })
     };
@@ -29,7 +31,7 @@ function LandingPage() {
     const loadMoreItems = () => {
 
         const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${CurrentPage + 1}`;
-        fetchMovies(endpoint)
+        fetchMovies(endpoint, true)
 
     };
 
